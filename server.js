@@ -8,6 +8,10 @@ const SpotifyWebApi = require('spotify-web-api-node');
 app.use(cors());
 app.use(bodyParser.json());
 
+app.get("/api", (req, res) => {
+    res.send("Hello vercel!");
+})
+
 app.post('/refresh', (req, res) => {
     const refreshToken = req.body.refreshToken;
     const spotifyApi = new SpotifyWebApi({
@@ -28,7 +32,6 @@ app.post('/refresh', (req, res) => {
 })
 
 app.post('/login', (req, res) => {
-    res.send("Hello login!!")
     const code = req.body.code;
     const spotifyApi = new SpotifyWebApi({
         redirectUri: "http://localhost:5173/music",
