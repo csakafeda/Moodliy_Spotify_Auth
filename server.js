@@ -28,6 +28,7 @@ app.post('/refresh', (req, res) => {
 })
 
 app.post('/login', (req, res) => {
+    res.send("Hello login!!")
     const code = req.body.code;
     const spotifyApi = new SpotifyWebApi({
         redirectUri: "http://localhost:5173/music",
@@ -44,10 +45,13 @@ app.post('/login', (req, res) => {
             });
         }).catch((err) => {
             console.error("Error in authorizationCodeGrant:", err);
-            res.sendStatus(400);
+            res.status(400).json({ error: 'Authorization failed' });
         });
 });
 
 app.listen(process.env.PORT || 3001, () => {
     console.log('Listening on port 3001');
 });
+
+
+module.exports = app;
